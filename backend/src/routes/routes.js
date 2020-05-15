@@ -1,6 +1,6 @@
 const express = require('express');
 const createError = require('http-errors');
-const userRoutes = require('./user.route');
+const userRoutes = require('./user.routes');
 
 
 const routes = express();

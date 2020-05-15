@@ -50,4 +50,45 @@ describe('api/users', () => {
         });
     });
 
+
+    describe('POST/', () => {
+        it('deve retornar o usuário quando todo o corpo da solicitação for válido' , async () => {
+            const res = await request(app)
+                .post("/api/users")
+                .send({
+                    name: "test",
+                    email: "test@gmail.com"
+                });
+            
+            expect(res.status).to.equal(200);
+            expect(res.body).to.have.property('_id');
+            expect(res.body).to.have.property('name', 'test');
+
+        });
+
+
+        it('deve retornar erro 500 quando o nome for inválido', async() => {
+            const res = await request(app)
+                .post('/api/users')
+                .send({
+                    name: "te",
+                    email: "teste@gmail.com"
+                });
+            
+            expect(res.status).to.equal(500);    
+        });
+
+        it('deve retornar erro 400 quando email for inválido', async () => {
+            const res = await request(app)
+                .post('/api/users')
+                .send({
+                    name: "teste",
+                    email:"esaldfiodsf"
+                });
+                
+            expect(res.status).to.equal(400);
+        });
+
+    });    
+
 });
