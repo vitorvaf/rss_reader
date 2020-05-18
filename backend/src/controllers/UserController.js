@@ -32,12 +32,11 @@ module.exports.createUser = async (req, res) => {
 
     if(!regex.test(email)){
         return res.status(400).send("email not valid");
-    }  
-   
+    }    
 
     await user.save()
-        .catch((err) =>{
-            return res.status(500).send(err);
+        .catch(() =>{
+            return res.status(500).json({erro: "user not created"});
         });
 
     return res.send(user);
