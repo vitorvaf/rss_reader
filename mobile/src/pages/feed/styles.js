@@ -1,21 +1,25 @@
 import { StyleSheet } from 'react-native'
 import Constants from 'expo-constants'
-import { color } from 'react-native-reanimated';
 
 
 module.exports = StyleSheet.create({
 
     container: {
         flex: 1,
-        paddingHorizontal: 24,
+        paddingHorizontal: 15,
         paddingTop: Constants.statusBarHeight + 20,
+
     },
 
     header: {
-        paddingTop: 25,
+        flex: 0,
+        padding: 5,
+        paddingTop: 15,
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: "row",
+        borderBottomColor: "black"
+
     },
 
     logo: {
@@ -33,6 +37,7 @@ module.exports = StyleSheet.create({
 
     headerText: {
         paddingHorizontal: 10,
+        fontWeight: 'bold'
 
     },
 
@@ -42,18 +47,19 @@ module.exports = StyleSheet.create({
 
     },
 
+    title: {
+        fontSize: 15,
+        fontWeight: "bold",
+        paddingBottom: 10
+
+    },
+
     description: {
         flex: 1,
+        flexWrap: 'wrap',
         flexDirection: 'row',
         backgroundColor: "#0000",
         marginTop: 15,
 
     },
-
-    content: {
-        flex: 1,
-        backgroundColor: "#0000",
-        fontSize: 20,
-
-    }
 });
