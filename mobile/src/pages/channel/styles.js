@@ -27,20 +27,30 @@ module.exports = StyleSheet.create({
     },
 
     channel: {
-        flex: 1,
-        flexDirection:'row',
-        justifyContent: 'flex-start',
+        paddingTop: 40,
+        flexWrap: 'wrap',
+        justifyContent: 'center',
         alignItems:'center',
-      
+        padding: 60
     }, 
 
     channelImage: {
         width: 100,
         height: 100,
         resizeMode: 'stretch',
+    }, 
+
+    channelName: {
+        fontSize: 22,
+        fontWeight: 'bold'
+
+
+    }, 
+
+    channelDescription: {
+        marginTop: 5,
+        fontSize: 15
     }
-
-
 
 
 });

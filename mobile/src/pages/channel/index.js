@@ -30,16 +30,13 @@ export default function Channel() {
                 </TextInput>
             </View>
 
-            <View style= { styles.channel }>
-                <Image 
-                    source= {{ uri: 'https://s3-sa-east-1.amazonaws.com/nexojornal/www/rss/logo.png'}}
-                    style= { styles.channelImage }>
-                        
-                    </Image>
-                <Text>Nexo Jornal</Text>
-                <Text></Text>
-
-
+            <View style={styles.channel}>
+                <Image
+                    source={{ uri: 'https://s3-sa-east-1.amazonaws.com/nexojornal/www/rss/logo.png' }}
+                    style={styles.channelImage}>
+                </Image>
+                <Text style={styles.channelName}>Nexo Jornal</Text>
+                <Text style={styles.channelDescription}>Informação clara e bem explicada você encontra aqui. Nexo, leitura obrigatória para quem quer entender o contexto das principais notícias do Brasil e do mundo.</Text>
             </View>
 
 
