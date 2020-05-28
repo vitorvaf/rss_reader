@@ -18,12 +18,25 @@ module.exports = StyleSheet.create({
         justifyContent: 'space-between'
     },
 
+    form:{
+        flexDirection: 'row',
+        flexWrap:'nowrap',
+        alignItems: 'center',
+
+    },
+
     input: {
+        flex:1,
         marginTop: 30,        
         paddingTop: 10,
         paddingBottom: 10,
         backgroundColor: '#FFF',
         borderRadius: 9,
+    },
+
+    plus:{
+        marginTop: 30
+        
     },
 
     channel: {

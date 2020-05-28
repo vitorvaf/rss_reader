@@ -38,9 +38,6 @@ export default function Item() {
                     imagesMaxWidth={Dimensions.get('window').width} />
 
             </View>
-
-
-
         </View>
     );
 }

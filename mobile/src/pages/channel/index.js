@@ -1,16 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TextInput, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
-import logo from '../../assets/icon.png';
 import styles from './styles';
+import axios from 'axios';
+import utils from '../../utils/utils';
 
 export default function Channel() {
     const navigation = useNavigation();
+    const [text, setText] = useState('');
+    const [channel, setChannel] = useState({
+        channel: {
+            title: '',
+            description: '',
+            image: {
+                uri: ''
+            }
+        }
+    });
+
 
 
     function navigationBack() {
         navigation.goBack();
+    }
+
+    async function searchChannel(url) {
+        var Channel = {};
+        fetch(url)
+            .then(response => response.text())
+            .then(async (response) => {
+                Channel = await utils.parserXmlToJson(response);
+                setChannel(Channel);
+                console.log(channel.channel.title);
+            }).catch((err) => {
+                if (!err)
+                    console.log('fetch', err);
+            });
+    }
+
+    async function addChannel(){
+
+        
+
     }
 
 
@@ -25,21 +57,29 @@ export default function Channel() {
             </View>
             <View style={styles.form}>
                 <TextInput
-                    placeholder="+ Add url"
-                    style={styles.input}>
+                    placeholder=" Add url"
+                    style={styles.input}
+                    onChangeText={text => setText(text)}
+                    defaultValue={text}>
+
                 </TextInput>
+                <TouchableOpacity
+                    style={styles.plus}
+                    onPress={() => { searchChannel(text) }}>
+                    <Feather name="plus" size={25} color="#000" />
+                </TouchableOpacity>
             </View>
-
-            <View style={styles.channel}>
-                <Image
-                    source={{ uri: 'https://s3-sa-east-1.amazonaws.com/nexojornal/www/rss/logo.png' }}
-                    style={styles.channelImage}>
-                </Image>
-                <Text style={styles.channelName}>Nexo Jornal</Text>
-                <Text style={styles.channelDescription}>Informação clara e bem explicada você encontra aqui. Nexo, leitura obrigatória para quem quer entender o contexto das principais notícias do Brasil e do mundo.</Text>
-            </View>
-
-
+            <TouchableOpacity
+            onPress= {() => addChannel()}>
+                <View style={styles.channel}>
+                    <Image
+                        source={{ uri: channel.channel.image.url }}
+                        style={styles.channelImage}>
+                    </Image>
+                    <Text style={styles.channelName}> {channel.channel.title} </Text>
+                    <Text style={styles.channelDescription}>{channel.channel.description}</Text>
+                </View>
+            </TouchableOpacity>
         </View>
     );
 }
