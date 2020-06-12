@@ -9,11 +9,11 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
-    "@react-navigation/native": "^5.4.0",
-    "@react-navigation/stack": "^5.3.7",
+    "@react-navigation/native": "^5.5.0",
+    "@react-navigation/stack": "^5.4.1",
     "axios": "^0.19.2",
     "chai": "^4.2.0",
-    "expo": "~37.0.3",
+    "expo": "^37.0.12",
     "expo-linear-gradient": "~8.1.0",
     "fast-xml-parser": "^3.17.3",
     "mocha": "^7.1.2",
@@ -31,11 +31,12 @@
     "react-native-web": "~0.11.7",
     "react-native-webview": "^9.4.0",
     "react-native-xml2js": "^1.0.3",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "expo-sqlite": "~8.1.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "~8.1.0",
-    "@babel/core": "^7.8.6"
+    "@babel/core": "^7.10.2",
+    "babel-preset-expo": "~8.1.0"
   },
   "private": true
 }

@@ -17,11 +17,9 @@ class Utils {
 
         }, (err, result) => {
             try {
-                // console.log(err);
                 var str = JSON.stringify(result);            
-                // console.log(str);
                 channel = JSON.parse(str);
-                // console.log(channel);
+                
             } catch (error) {
                 console.log(error)
             }

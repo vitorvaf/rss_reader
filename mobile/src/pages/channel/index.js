@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TextInput, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
+
 import styles from './styles';
-import axios from 'axios';
+import channelModel from '../../models/channelModel';
+import itemModel from '../../models/itemModel';
 import utils from '../../utils/utils';
+import { create, getChannels, getByName } from '../../data/repository/channelRepository';
+import { createItem, getItems } from '../../data/repository/itemRepository';
 
 export default function Channel() {
     const navigation = useNavigation();
@@ -29,19 +33,37 @@ export default function Channel() {
         var Channel = {};
         fetch(url)
             .then(response => response.text())
-            .then(async (response) => {
-                Channel = await utils.parserXmlToJson(response);
+            .then(async (data) => {
+                Channel = await utils.parserXmlToJson(data);
+                try {
+
+                    var newChannel = new channelModel(Channel.channel.title,
+                        Channel.channel.link,
+                        Channel.channel.description,
+                        Channel.channel.image.url);
+
+                    var channel_id = await create(newChannel);
+
+                    Channel.channel.item.map( async (item) => {
+                        console.log(item.dc);
+                        let obj = new itemModel(item.title, "", item.link, item.pubdate, item.description, channel_id, false, false);
+                        let id = await createItem(obj);
+                        return id;
+                    });
+
+                } catch (error) {
+                    console.log(error)
+                }
                 setChannel(Channel);
-                console.log(channel.channel.title);
+
             }).catch((err) => {
-                if (!err)
-                    console.log('fetch', err);
+                console.log('fetch', err);
             });
     }
 
-    async function addChannel(){
+    async function addChannel() {
 
-        
+
 
     }
 
@@ -70,7 +92,7 @@ export default function Channel() {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity
-            onPress= {() => addChannel()}>
+                onPress={() => addChannel()}>
                 <View style={styles.channel}>
                     <Image
                         source={{ uri: channel.channel.image.url }}
