@@ -9,14 +9,13 @@ export default class DatabaseInit {
         db.exec([{ sql: 'PRAGMA foreign_keys = ON;', args: [] }], false, () =>
             console.log('Foreign keys turned on')
         );
-        this.InitDb()
+        this.InitDb();
     }
 
     InitDb(){
-
         var sql = [
-            `DROP TABLE IF EXISTS channel;`,
             `DROP TABLE IF EXISTS item;`,
+            `DROP TABLE IF EXISTS channel;`,
             
 
             `create table if not exists channel (
@@ -34,6 +33,7 @@ export default class DatabaseInit {
             link text,
             pubDate text,
             description text,
+            content text,
             channel_id int,
             liked bool,
             readed bool,

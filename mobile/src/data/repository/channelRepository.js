@@ -6,8 +6,6 @@ const table = 'channel';
 const db = DatabaseConnection.getConnection();
 
 async function create(channelModel) {
-    console.log('chegou no repository');
-
     return new Promise((resolve, reject) => db.transaction(
         tx => {
             tx.executeSql(`insert into ${table}

@@ -4,7 +4,8 @@ import Database  from './src/data/initDataBase';
 
 
 export default function App() {
-  const db  = new Database();  
+  const db  = new Database(); 
+  db.InitDb(); 
   return (
     <Routes/>
   );

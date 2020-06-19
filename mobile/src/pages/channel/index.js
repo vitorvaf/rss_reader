@@ -26,7 +26,7 @@ export default function Channel() {
 
 
     function navigationBack() {
-        navigation.goBack();
+        navigation.navigate('Feed');
     }
 
     async function searchChannel(url) {
@@ -36,17 +36,27 @@ export default function Channel() {
             .then(async (data) => {
                 Channel = await utils.parserXmlToJson(data);
                 try {
-
-                    var newChannel = new channelModel(Channel.channel.title,
+                    var newChannel = new channelModel(
+                        Channel.channel.title,
                         Channel.channel.link,
                         Channel.channel.description,
+                        Channel.channel.content,
                         Channel.channel.image.url);
 
                     var channel_id = await create(newChannel);
 
-                    Channel.channel.item.map( async (item) => {
-                        console.log(item.dc);
-                        let obj = new itemModel(item.title, "", item.link, item.pubdate, item.description, channel_id, false, false);
+                    Channel.channel.item.map(async (item) => {                        
+                        let obj = new itemModel(
+                            item.title,
+                            item.creator,
+                            item.link,
+                            item.pubdate,
+                            item.description,
+                            item.content,
+                            channel_id,
+                            false,
+                            false
+                        );
                         let id = await createItem(obj);
                         return id;
                     });
@@ -59,13 +69,7 @@ export default function Channel() {
             }).catch((err) => {
                 console.log('fetch', err);
             });
-    }
-
-    async function addChannel() {
-
-
-
-    }
+    }    
 
 
     return (
